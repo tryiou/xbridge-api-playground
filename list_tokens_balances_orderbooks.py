@@ -66,7 +66,7 @@ for market in my_markets:
     print("PRICE:", market.ask[-1][0], "QUANTITY:", market.ask[-1][1], "ID:", market.ask[-1][2])
     print(market.pair, "FIRST BUY ORDER:")
     print("PRICE:", market.bid[0][0], "QUANTITY:", market.bid[0][1], "ID:", market.bid[0][2])
-    if market.ask[-1][0] < market.bid[0][0]:
+    if float(market.ask[-1][0]) < float(market.bid[0][0]):
         print("POSSIBLE ARBITRAGE PROFIT ON", market.pair)
     print("")
 print(Market.MarketCount, "active markets with available tokens")

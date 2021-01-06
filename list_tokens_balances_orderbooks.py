@@ -72,8 +72,9 @@ if __name__ == "__main__":
     # List active markets from my_tokens_balances
     my_markets = dx_get_my_markets(my_tokens_balances)
     my_markets.sort(key=lambda x: x.pair)  # Sort object list by object.pair
+
+    print("DISPLAY FIRST ORDERS AROUND CENTER PRICE ASK/BID:\n")
     for market in my_markets:
-        # DISPLAY FIRST ORDERS AROUND CENTER PRICE ASK/BID
 
         print(market.pair, "FIRST SELL ORDER:")
         if market.ask:

@@ -66,3 +66,4 @@ if my_tokens_balances["BLOCK"] and my_tokens_balances["LTC"]:
     dex_orderbook_ask, dex_orderbook_bid = dxbottools.getorderbook("BLOCK", "LTC")
     print(dex_orderbook_ask[-1])
     print(dex_orderbook_bid[0])
+    #DO MAGIC !

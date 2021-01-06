@@ -17,8 +17,8 @@ def uni_conversion(rate1, rate2, decimal1, decimal2=10 ** 6):  # default decimal
     return conv
 
 
-def uni_eth_to_token_input(eth_amount, to_token, token_dec):
-    return uniswap_wrapper.get_eth_token_input_price(to_token, eth_amount * 10 ** 18) / token_dec
+def uni_eth_to_token_input(eth_amount, to_token):
+        return uniswap_wrapper.get_eth_token_input_price(to_token, eth_amount * 10 ** 18)
 
 
 # functions <<
@@ -28,36 +28,35 @@ uniswap_wrapper = init_uniswap_wrapper()
 
 usdt = Web3.toChecksumAddress("0xdac17f958d2ee523a2206206994597c13d831ec7")
 usdt_dec = 10 ** 6
-usdt_rate = uni_eth_to_token_input(1, usdt, usdt_dec)
+usdt_rate = uni_eth_to_token_input(1, usdt)
 usd_eth_rate = usdt_rate / usdt_dec
-print("1 ETH =", usdt_rate, "USD")
+print("1 ETH =", usd_eth_rate, "USD")
 
 wbtc = Web3.toChecksumAddress("0x2260fac5e5542a773aa44fbcfedf7c193bc2c599")
 wbtc_dec = 10 ** 8
-wbtc_rate = uni_eth_to_token_input(1, wbtc, wbtc_dec)
+wbtc_rate = uni_eth_to_token_input(1, wbtc)
 print("1 WBTC =", uni_conversion(wbtc_rate, usdt_rate, wbtc_dec), "USDT")
 
 usdc = Web3.toChecksumAddress("0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48")
 usdc_dec = 10 ** 6
-usdc_rate = uni_eth_to_token_input(1, usdc, usdc_dec)
+usdc_rate = uni_eth_to_token_input(1, usdc)
 print("1 USDC =", uni_conversion(usdc_rate, usdt_rate, usdc_dec), "USDT")
 
 ablock = Web3.toChecksumAddress("0xe692c8d72bd4ac7764090d54842a305546dd1de5")
 ablock_dec = 10 ** 8
-ablock_rate = uni_eth_to_token_input(1, ablock, ablock_dec)
+ablock_rate = uni_eth_to_token_input(1, ablock)
 print("1 aBLOCK =", uni_conversion(ablock_rate, usdt_rate, ablock_dec), "USDT")
 
-print("")
 
-print("public price for ETH to Token trades with an exact input.")
+print("\npublic price for ETH to Token trades with an exact input.")
 
 print("Swaping 1 ETH to aBlock:")
-eth_to_token = uni_eth_to_token_input(1, ablock, ablock_dec)
-print(eth_to_token, "aBlock,", 1 / eth_to_token, "ETH/aBlock,", (1 / eth_to_token) * usdt_rate, "USDT/aBlock")
+eth_to_token = uni_eth_to_token_input(1, ablock)/ablock_dec
+print(eth_to_token, "aBlock,", 1 / eth_to_token, "ETH/aBlock,", (1 / eth_to_token) * usd_eth_rate, "USDT/aBlock")
 
 print("Swapping 2 ETH to aBlock:")
-eth_to_token = uni_eth_to_token_input(2, ablock, ablock_dec)
-print(eth_to_token, "aBlock,", 2 / eth_to_token, "ETH/aBlock,", (2 / eth_to_token) * usdt_rate, "USDT/aBlock")
+eth_to_token = uni_eth_to_token_input(2, ablock)/ablock_dec
+print(eth_to_token, "aBlock,", 2 / eth_to_token, "ETH/aBlock,", (2 / eth_to_token) * usd_eth_rate, "USDT/aBlock")
 
 print("\nXBRIDGE SIDE:")
 my_tokens_balances = dx_get_tokens_balance()  # DICT

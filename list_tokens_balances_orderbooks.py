@@ -34,7 +34,7 @@ def dx_get_my_markets(tokens_balances):
     print("Listing DX markets and retrieving orderbook:")
     # WE LOOP ALL OUR TOKENS TO PRODUCE TOKEN1
     for token1 in sorted(tokens_balances.keys()):
-        # WE LOOP ALL OUR TOKENS AGAIN IN REVERSE MODE TO PRODUCE TOKEN2
+        # WE LOOP ALL OUR TOKENS AGAIN TO PRODUCE TOKEN2
         for token2 in sorted(tokens_balances.keys()):
             if token1 != token2:
                 # TEST IF PAIR(OR ITS REVERSE) IS ALREADY PRESENT IN OUR BUFFER LIST

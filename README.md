@@ -1,7 +1,7 @@
 # xbridge-api-playground
-Blocknet xbridge usage examples
+Blocknet xbridge api usage examples
 
-need python3+,pip,git
+need python3+, pip, git
 
 usage:
 <pre>
@@ -12,9 +12,9 @@ or download/extract repo from web, then:
 install requirements with:
   pip install -r requirements.txt   #(pip3 on ubuntu20)
 edit settings:
-  utils/dxsettings.py and set your blocknet rpcport/rpcuser/rpcpassword,
-  (optionnal) infura endpoint/info,
-  (optionnal) and/or ccxt supported exchange data.
+  utils/dxsettings.py	#set your blocknet rpcport/rpcuser/rpcpassword,
+  			#(optionnal) infura endpoint/address/privatekey,
+  			#(optionnal) ccxt supported exchange name/api/secret.
 run one of the scripts with:
   python xbridge_tokens_balances_orderbooks.py   #(python3 on ubuntu20)
   or

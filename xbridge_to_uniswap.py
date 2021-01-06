@@ -1,6 +1,5 @@
 from xbridge_tokens_balances_orderbooks import *
 from web3 import Web3
-import web3
 from uniswap import Uniswap  # https://github.com/shanefontaine/uniswap-python for more info
 from utils import dxsettings
 import json

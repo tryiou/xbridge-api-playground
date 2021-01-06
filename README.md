@@ -16,7 +16,7 @@ edit settings:
   (optionnal) infura endpoint/info,
   (optionnal) and/or ccxt supported exchange data.
 run one of the scripts with:
-  python list_tokens_balances_orderbooks.py   #(python3 on ubuntu20)
+  python xbridge_tokens_balances_orderbooks.py   #(python3 on ubuntu20)
   or
   python xbridge_to_uniswap.py 
 </pre>

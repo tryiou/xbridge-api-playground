@@ -14,5 +14,5 @@ install requirements with:
 edit setting:
   utils/dxsettings.py and set your blocknet rpcport, rpcuser, rpcpassword
 run the script with:
-  python list_tokens_balances_orderbooks.py (python3 on ubuntu20)
+  python list_tokens_balances_orderbooks.py   #(python3 on ubuntu20)
 </pre>

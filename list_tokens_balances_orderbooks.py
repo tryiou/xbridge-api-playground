@@ -64,32 +64,32 @@ def dx_get_my_markets(tokens_balances):
 # FUNCTIONS<<
 
 # MAIN>>
+if __name__ == "__main__":
+    # List local tokens names and balances
+    my_tokens_balances = dx_get_tokens_balance()  # DICT
+    # print(my_tokens_balances)
 
-# List local tokens names and balances
-my_tokens_balances = dx_get_tokens_balance()  # DICT
-# print(my_tokens_balances)
+    # List active markets from my_tokens_balances
+    my_markets = dx_get_my_markets(my_tokens_balances)
+    my_markets.sort(key=lambda x: x.pair)  # Sort object list by object.pair
+    for market in my_markets:
+        # DISPLAY FIRST ORDERS AROUND CENTER PRICE ASK/BID
 
-# List active markets from my_tokens_balances
-my_markets = dx_get_my_markets(my_tokens_balances)
-my_markets.sort(key=lambda x: x.pair)  # Sort object list by object.pair
-for market in my_markets:
-    # DISPLAY FIRST ORDERS AROUND CENTER PRICE ASK/BID
+        print(market.pair, "FIRST SELL ORDER:")
+        if market.ask:
+            print("PRICE:", market.ask[-1][0], "QUANTITY:", market.ask[-1][1], "ID:", market.ask[-1][2])
+        else:
+            print("NONE")
 
-    print(market.pair, "FIRST SELL ORDER:")
-    if market.ask:
-        print("PRICE:", market.ask[-1][0], "QUANTITY:", market.ask[-1][1], "ID:", market.ask[-1][2])
-    else:
-        print("NONE")
+        print(market.pair, "FIRST BUY ORDER:")
+        if market.bid:
+            print("PRICE:", market.bid[0][0], "QUANTITY:", market.bid[0][1], "ID:", market.bid[0][2])
+        else:
+            print("NONE")
+        if market.ask and market.bid and float(market.ask[-1][0]) < float(market.bid[0][0]):
+            print("POSSIBLE ARBITRAGE PROFIT ON", market.pair)
+        print("")
 
-    print(market.pair, "FIRST BUY ORDER:")
-    if market.bid:
-        print("PRICE:", market.bid[0][0], "QUANTITY:", market.bid[0][1], "ID:", market.bid[0][2])
-    else:
-        print("NONE")
-    if market.ask and market.bid and float(market.ask[-1][0]) < float(market.bid[0][0]):
-        print("POSSIBLE ARBITRAGE PROFIT ON", market.pair)
-    print("")
+    print(Market.MarketCount, "active markets with available tokens")
 
-print(Market.MarketCount, "active markets with available tokens")
-
-# MAIN<<
+    # MAIN<<

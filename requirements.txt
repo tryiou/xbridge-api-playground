@@ -1,3 +1,6 @@
 requests
 Flask
 python-dateutil
+uniswap-python
+web3
+ccxt

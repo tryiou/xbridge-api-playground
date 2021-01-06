@@ -1,4 +1,4 @@
-from utils import dxbottools
+from utils import dxbottools  # https://api.blocknet.co/#xbridge-api for more info
 
 
 class Market:

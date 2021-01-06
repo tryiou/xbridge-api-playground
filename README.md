@@ -12,7 +12,7 @@ or download/extract repo from web, then:
 install requirements with:
   pip install -r requirements.txt   #(pip3 on ubuntu20)
 edit setting:
-utils/dxsettings.py and set your blocknet rpcport, rpcuser, rpcpassword
+  utils/dxsettings.py and set your blocknet rpcport, rpcuser, rpcpassword
 run the script with:
   python list_tokens_balances_orderbooks.py (python3 on ubuntu20)
 </pre>

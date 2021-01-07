@@ -38,9 +38,9 @@ def dx_get_my_markets(tokens_balances):
         for token2 in sorted(tokens_balances.keys()):
             if token1 != token2:
                 # TEST IF PAIR(OR ITS REVERSE) IS ALREADY PRESENT IN OUR BUFFER LIST
-                pairing_exist1 = any(x for x in buffer_markets if x.pair == token1 + "/" + token2)
-                pairing_exist2 = any(x for x in buffer_markets if x.pair == token2 + "/" + token1)
-                if not (pairing_exist1 or pairing_exist2):
+                pairing_exist = any(
+                    x for x in buffer_markets if x.pair == token1 + "/" + token2 or x.pair == token2 + "/" + token1)
+                if not pairing_exist:
                     buffer_markets.append(Market(token1 + "/" + token2))
                     if token1 != "Wallet" and token2 != "Wallet":
                         if token1 == preferred_token2:  # REVERSE THE PAIR IF NEEDED TO SELECT PREFERRED TOKEN2

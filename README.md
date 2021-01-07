@@ -19,4 +19,6 @@ run one of the scripts with:
   python xbridge_tokens_balances_orderbooks.py   #(python3 on ubuntu20)
   or
   python xbridge_to_uniswap.py 
+  or
+  python xbridge_to_ccxt.py
 </pre>

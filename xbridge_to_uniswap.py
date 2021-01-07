@@ -1,8 +1,6 @@
 from xbridge_tokens_balances_orderbooks import *
 from web3 import Web3
 from uniswap import Uniswap  # https://github.com/shanefontaine/uniswap-python for more info
-from utils import dxsettings
-import json
 
 EIP20_ABI = json.loads(
     '[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]')  # noqa: 501
@@ -29,10 +27,10 @@ def uni_eth_to_token_input(eth_amount, to_token):
     return uniswap_wrapper.get_eth_token_input_price(to_token, eth_amount * 10 ** 18)
 
 
-def calc_eth_to_token_from_input(amount, token, token_dec):
-    contract = w3.eth.contract(abi=EIP20_ABI, address=token)
-    print("calc swap", amount, "ETH to", contract.functions.symbol().call(), ":")
-    return uni_eth_to_token_input(amount, token) / token_dec
+def calc_eth_to_token_from_input(eth_amount, to_token):
+    contract = w3.eth.contract(abi=EIP20_ABI, address=to_token)
+    print("calc swap", eth_amount, "ETH to", contract.functions.symbol().call(), ":")
+    return uni_eth_to_token_input(eth_amount, to_token) / (10 ** contract.functions.decimals().call())
 
 
 # functions <<
@@ -72,13 +70,13 @@ if __name__ == "__main__":
 
     # Swaping 1 ETH to aBlock
     amount = 1
-    eth_to_token = calc_eth_to_token_from_input(amount, ablock, ablock_dec)
+    eth_to_token = calc_eth_to_token_from_input(amount, ablock)
     print(eth_to_token, "aBlock,", amount / eth_to_token, "ETH/aBlock,", (amount / eth_to_token) * usd_eth_rate,
           "USDT/aBlock")
 
     # Swaping 2 ETH to aBlock
     amount = 2
-    eth_to_token = calc_eth_to_token_from_input(amount, ablock, ablock_dec)
+    eth_to_token = calc_eth_to_token_from_input(amount, ablock)
     print(eth_to_token, "aBlock,", amount / eth_to_token, "ETH/aBlock,", (amount / eth_to_token) * usd_eth_rate,
           "USDT/aBlock")
 

@@ -1,4 +1,6 @@
 from utils import dxbottools  # https://api.blocknet.co/#xbridge-api for more info
+from utils import dxsettings
+import json
 
 
 class Market:
@@ -26,8 +28,8 @@ def dx_get_tokens_balance():
     return balances  # Dict
 
 
-def dx_get_my_markets(tokens_balances):
-    preferred_token2 = "LTC"  # Prioritize this token as coin2 if possible
+def dx_get_my_markets(tokens_balances, preferred_token2="LTC"):
+    # Prioritize this token as coin2 if possible
     # Create a list of Market objects
     buffer_markets = []
     final_markets = []
@@ -89,6 +91,7 @@ if __name__ == "__main__":
             print("NONE")
         if market.ask and market.bid and float(market.ask[-1][0]) < float(market.bid[0][0]):
             print("POSSIBLE ARBITRAGE PROFIT ON", market.pair)
+            # DO MAGIC !
         print("")
 
     print(Market.MarketCount, "active markets with available tokens")

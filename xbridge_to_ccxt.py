@@ -28,7 +28,7 @@ def cex_calc_price_from_ticker(ticker):
     if ticker['ask'] > ticker['bid']:
         return ticker['ask'] - (ticker['ask'] - ticker['bid']) / 2
     elif ticker['ask'] < ticker['bid']:
-        return ticker['bid'] - ticker['bid'] - ticker['ask'] / 2
+        return ticker['bid'] - (ticker['bid'] - ticker['ask']) / 2
     elif ticker['bid'] == ticker['ask']:
         return ticker['bid']
 

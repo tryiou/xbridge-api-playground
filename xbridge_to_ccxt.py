@@ -34,7 +34,14 @@ def cex_calc_price_from_ticker(ticker):
 
 
 def dex_calc_price_from_orderbook(ask, bid):
-    return float(ask[0][0]) - (float(ask[0][0]) - float(bid[0][0])) / 2
+    ask = float(ask[0][0])
+    bid = float(bid[0][0])
+    if ask > bid:
+        return ask - (ask - bid) / 2
+    elif ask < bid:
+        return bid - (bid - ask) / 2
+    elif ask == bid:
+        return ask
 
 
 if __name__ == "__main__":
@@ -45,8 +52,8 @@ if __name__ == "__main__":
     cex_ltc_ticker = cex_ccxt.fetch_ticker("LTC/BTC")
     print("\nCEX side: ", cex_ccxt.name, "\n")
     print("BALANCES", cex_balances)
-    print("BLOCK/BTC middle price is ", cex_calc_price_from_ticker(cex_block_ticker))
-    print("BLOCK/LTC middle price is ", cex_calc_price_from_ticker(cex_ltc_ticker))
+    print("CEX BLOCK/BTC middle price is ", cex_calc_price_from_ticker(cex_block_ticker))
+    print("CEX BLOCK/LTC middle price is ", cex_calc_price_from_ticker(cex_ltc_ticker))
     # CEX SIDE<<
 
     # DEX SIDE>>
@@ -60,7 +67,8 @@ if __name__ == "__main__":
             dex_blockbtc[0].ask.reverse()
             print(dex_blockbtc[0].ask)
             print(dex_blockbtc[0].bid)
-            print("BLOCK/BTC middle price is", float(dex_blockbtc[0].ask[0][0]) - float(dex_blockbtc[0].bid[0][0]))
+            dex_block_btc = dex_calc_price_from_orderbook(dex_blockbtc[0].ask, dex_blockbtc[0].bid)
+            print("DEX BLOCK/BTC middle price is", dex_block_btc)
             print("")
     if "LTC" in dex_balances and "BLOCK" in dex_balances:
         dex_markets = dx_get_my_markets(dex_balances, "LTC")
@@ -71,7 +79,7 @@ if __name__ == "__main__":
             print(dex_blockltc[0].ask)
             print(dex_blockltc[0].bid)
             dex_block_ltc = dex_calc_price_from_orderbook(dex_blockltc[0].ask, dex_blockltc[0].bid)
-            print("BLOCK/LTC middle price is", dex_block_ltc, "\nconverted to BLOCK/BTC =",
+            print("DEX BLOCK/LTC middle price is", dex_block_ltc, "\nconverted to BLOCK/BTC =",
                   dex_block_ltc * cex_calc_price_from_ticker(cex_ltc_ticker))
             print("")
             # DO MAGIC!

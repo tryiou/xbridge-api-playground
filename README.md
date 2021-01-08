@@ -2,6 +2,7 @@
 Blocknet xbridge api usage examples
 
 More information here:
+<br />
 https://docs.blocknet.co/
 <br />
 https://api.blocknet.co/#xbridge-api

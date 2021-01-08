@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     print("\nXBRIDGE SIDE:")
     my_tokens_balances = dx_get_tokens_balance()  # DICT
-    if my_tokens_balances["BLOCK"] and my_tokens_balances["LTC"]:
+    if "BLOCK" in my_tokens_balances and "LTC" in my_tokens_balances:
         dex_orderbook_ask, dex_orderbook_bid = dxbottools.getorderbook("BLOCK", "LTC")
         print("BLOCK/LTC FIRST ORDERS FROM CENTER")
         print("SELL")

@@ -8,9 +8,11 @@ https://docs.blocknet.co/
 https://api.blocknet.co/#xbridge-api
 
 uniswap-python wrapper:
+<br />
 https://github.com/shanefontaine/uniswap-python
 
 ccxt:
+<br />
 https://github.com/ccxt/ccxt
 
 need python3+, pip, git

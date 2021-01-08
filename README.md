@@ -3,6 +3,7 @@ Blocknet xbridge api usage examples
 
 More information here:
 https://docs.blocknet.co/
+<br />
 https://api.blocknet.co/#xbridge-api
 
 uniswap-python wrapper:

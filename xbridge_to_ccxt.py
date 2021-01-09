@@ -60,9 +60,9 @@ if __name__ == "__main__":
     print("\nDEX side: Xbridge")
     dex_balances = dx_get_tokens_balance()
     if "BTC" in dex_balances and "BLOCK" in dex_balances:
-        dex_markets = dx_get_my_markets(dex_balances, "BTC")
+        dex_markets = dx_get_my_markets(dex_balances, preferred_token2="BTC")
         dex_blockbtc = [item for item in dex_markets if item.pair == "BLOCK/BTC"]
-        print(len(dex_blockbtc))
+        # print(len(dex_blockbtc))
         if dex_blockbtc:
             dex_blockbtc[0].ask.reverse()
             print(dex_blockbtc[0].ask)
@@ -71,9 +71,9 @@ if __name__ == "__main__":
             print("DEX BLOCK/BTC middle price is", dex_block_btc)
             print("")
     if "LTC" in dex_balances and "BLOCK" in dex_balances:
-        dex_markets = dx_get_my_markets(dex_balances, "LTC")
+        dex_markets = dx_get_my_markets(dex_balances, preferred_token2="LTC")
         dex_blockltc = [item for item in dex_markets if item.pair == "BLOCK/LTC"]
-        print(len(dex_blockltc))
+        # print(len(dex_blockltc))
         if dex_blockltc:
             dex_blockltc[0].ask.reverse()
             print(dex_blockltc[0].ask)

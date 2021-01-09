@@ -18,7 +18,7 @@ class Market:
 def dx_get_tokens_balance():
     balances = dxbottools.rpc_connection.dxGetTokenBalances()
     print("\nXbridge coins & balances:")
-    if balances["Wallet"]:
+    if "Wallet" in balances:
         print("Local_Blocknet:", balances["Wallet"])
     # list each token in the sorted dict,
     for token in sorted(balances.keys()):

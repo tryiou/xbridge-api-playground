@@ -28,8 +28,7 @@ def dx_get_tokens_balance():
     return balances  # Dict
 
 
-def dx_get_my_markets(tokens_balances, preferred_token2="LTC"):
-    # Prioritize this token as coin2 if possible
+def dx_get_my_markets(tokens_balances, preferred_token2="LTC"):  # Prioritize this preferred_token2 as coin2 if possible
     # Create a list of Market objects
     buffer_markets = []
     final_markets = []

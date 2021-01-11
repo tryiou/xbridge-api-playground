@@ -34,6 +34,7 @@ def cex_calc_price_from_ticker(ticker):
 
 
 def dex_calc_price_from_orderbook(ask, bid):
+    # Need a reversed ask list from dxgetorderbook result, or a list with only 1 element
     ask = float(ask[0][0])
     bid = float(bid[0][0])
     if ask > bid:

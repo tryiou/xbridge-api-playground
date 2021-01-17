@@ -54,7 +54,7 @@ if __name__ == "__main__":
     print("\nCEX side: ", cex_ccxt.name, "\n")
     print("BALANCES", cex_balances)
     print("CEX BLOCK/BTC middle price is ", cex_calc_price_from_ticker(cex_block_ticker))
-    print("CEX BLOCK/LTC middle price is ", cex_calc_price_from_ticker(cex_ltc_ticker))
+    print("CEX LTC/BTC middle price is ", cex_calc_price_from_ticker(cex_ltc_ticker))
     # CEX SIDE<<
 
     # DEX SIDE>>

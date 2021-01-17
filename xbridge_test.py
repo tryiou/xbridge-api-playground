@@ -52,16 +52,18 @@ def dx_get_my_markets(tokens_balances, preferred_token2="LTC"):  # Prioritize th
                         if f_ask or f_bid:
                             final_markets.append(Market(t1 + "/" + t2, f_ask, f_bid))
     return final_markets  # List of Market objects
-# FUNCTIONS<<
 
+
+# FUNCTIONS<<
 
 
 # MAIN>>
 if __name__ == "__main__":
     list_tokens_balances = []
+
     err_count = 0
     count = 0
-    print("DATE , WALLETS , XBRIDGE_CALLS, EXEC_TIMER")
+    print("DATE , WALLETS , XBRIDGE_CALLS, EXEC_TIMER, ERR_COUNT")
     while 1:
         try:
             rpc_call_count = 0
@@ -72,7 +74,8 @@ if __name__ == "__main__":
             count += 1
             my_tokens_balances = sorted(my_tokens_balances)
             list_tokens_balances.append(
-                [datetime.datetime.utcnow().strftime("%H:%M:%S"), my_tokens_balances, rpc_call_count, exec_time])
+                [datetime.datetime.utcnow().strftime("%H:%M:%S"), my_tokens_balances, rpc_call_count, exec_time,
+                 err_count])
             print(list_tokens_balances[-1])
         except Exception as error:
             print(type(error), error)

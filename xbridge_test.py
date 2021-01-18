@@ -1,9 +1,7 @@
 from utils import dxbottools  # https://api.blocknet.co/#xbridge-api for more info
 import time
 import datetime
-
-
-# BENCHMARK XBRIDGE PERFORMANCES
+import sys
 
 
 class Market:
@@ -62,12 +60,28 @@ def dx_get_my_markets(tokens_balances, preferred_token2="LTC"):  # Prioritize th
 
 # MAIN>>
 if __name__ == "__main__":
-    list_tokens_balances = []
+    main_timer = time.time()
+    if len(sys.argv) > 1 and int(sys.argv[1]):
+        max_time = sys.argv[1]
+    else:
+        max_time = 3600
+    print('max_time =', max_time)
 
+    list_tokens_balances = []
     err_count = 0
     count = 0
-    print("DATE , WALLETS , XBRIDGE_CALLS, EXEC_TIMER, ERR_COUNT")
+    format_message = "DATE , WALLETS , XBRIDGE_CALLS, EXEC_TIMER, ERR_COUNT"
+    print(format_message)
     while 1:
+        if time.time() - main_timer > max_time:
+            result_file = open('xbridge_testing_result.txt', 'w')
+            result_file.writelines(format_message)
+            for item in list_tokens_balances:
+                result_file.writelines(
+                    str(item[0]) + ", " + str(item[1]) + ", " + str(item[2]) + ", " + str(item[3]) + ", " + str(
+                        item[4]) + "\n")
+            result_file.close()
+            exit()
         try:
             rpc_call_count = 0
             timer = time.time()
@@ -83,7 +97,9 @@ if __name__ == "__main__":
         except Exception as error:
             print(type(error), error)
             err_count += 1
+            time.sleep(5)
             if err_count == 50:
                 exit()
-        time.sleep(5)
+        else:
+            time.sleep(5)
 # MAIN<<

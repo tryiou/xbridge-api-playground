@@ -62,7 +62,7 @@ def dx_get_my_markets(tokens_balances, preferred_token2="LTC"):  # Prioritize th
 if __name__ == "__main__":
     main_timer = time.time()
     if len(sys.argv) > 1 and int(sys.argv[1]):
-        max_time = sys.argv[1]
+        max_time = int(sys.argv[1])
     else:
         max_time = 3600
     print('max_time =', max_time)

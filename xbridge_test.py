@@ -70,7 +70,7 @@ if __name__ == "__main__":
     list_tokens_balances = []
     err_count = 0
     count = 0
-    format_message = "DATE , WALLETS , XBRIDGE_CALLS, EXEC_TIMER, ERR_COUNT"
+    format_message = "DATE , WALLETS , XBRIDGE_CALLS, EXEC_TIMER, ERR_COUNT\n"
     print(format_message)
     while 1:
         if time.time() - main_timer > max_time:

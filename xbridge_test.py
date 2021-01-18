@@ -4,6 +4,9 @@ import datetime
 import sys
 
 
+# XBRIDGE BENCHMARK TEST
+
+
 class Market:
     MarketCount = 0
 
@@ -97,9 +100,7 @@ if __name__ == "__main__":
         except Exception as error:
             print(type(error), error)
             err_count += 1
-            time.sleep(5)
             if err_count == 50:
                 exit()
-        else:
-            time.sleep(5)
+        time.sleep(5)
 # MAIN<<
